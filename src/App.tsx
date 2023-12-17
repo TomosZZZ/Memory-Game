@@ -1,7 +1,11 @@
-import './App.css'
+import Game from './features/game'
 
 function App() {
-	return <></>
+	return (
+		<div className='w-full'>
+			<Game />
+		</div>
+	)
 }
 
 export default App
