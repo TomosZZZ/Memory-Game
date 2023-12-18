@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { Board, CellObj } from '../types/types'
 
+import { images } from '../assets/images'
+import image0 from '../assets/images/image-0.jpg'
 const GameBoard = () => {
 	const [board, setBoard] = useState<Board>([
 		[1, 4, 0],
@@ -24,6 +26,9 @@ const GameBoard = () => {
 
 		if (!selectedCell) {
 			setSelectedCell({ row: rowIndex, col: cellIndex })
+			return
+		}
+		if (selectedCell.row === rowIndex && selectedCell.col === cellIndex) {
 			return
 		}
 		const currentCell = board[rowIndex][cellIndex]
@@ -60,12 +65,19 @@ const GameBoard = () => {
 							<div
 								className={`${
 									revealedPairs[rowIndex][cellIndex] && 'opacity-0'
-								}  w-[50px] h-[50px] bg-white text-center flex items-center justify-center text-black`}
+								}  w-[100px] h-[100px] bg-white text-center cursor-pointer flex items-center justify-center text-black`}
 								key={cellIndex}
 								onClick={() => {
 									handleSelectCell(rowIndex, cellIndex)
 								}}>
-								{reavealedBoard[rowIndex][cellIndex] && <p>{cell}</p>}
+								{cell !== null && (
+									<img
+										className={`${
+											reavealedBoard[rowIndex][cellIndex] ? 'visible' : 'hidden'
+										} cursor-pointer`}
+										src={images[('image' + cell) as keyof typeof images]}
+									/>
+								)}
 							</div>
 						))}
 					</div>
